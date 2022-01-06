@@ -484,7 +484,10 @@ XII. Admin processes
 Run admin/management tasks as one-off processes
 
 
+
+
 Endpoints:
+
 1)RESTful Webservices (Smart Endpoints)
   - HTTP/HTTPS
 
@@ -501,15 +504,41 @@ AMQP
           -Spring Web
           -Spring Boot Actuator
           -Spring Boot DevTools
-
-
+          -Spring Boot Data JPA 
 --------------------------------------------
 
 Spring IOC
-                  @Component
+          
+Annotation Based configuration
+===============================
+                                           @Component
 
-@Controller        @Service     @Reposiotory
-@RestController
+              @Controller                  @Service                   @Reposiotry
+
+              Controller                   Service Layer               Dao Layer
+
+
+        @RestController = @Controller +@ResponseBody
+
+
+@Component,
+@Repository, 
+@Service, 
+@Controller,
+@RestController, 
+@ControllerAdvice,
+@Configuration 
+
+Product
+======
+id
+name
+price
+brand
+catagory
+
+
+
 
 ----------------------------------------------------
 /products               GET
@@ -518,6 +547,49 @@ Spring IOC
 /products/1             GET
 /products/1             DELETE
 -------------------------------------------------------
+
+
+@ResponseBody  => Server to Client =>  Java Object to JSON or XML   => Accept       = application/json 
+
+@RequestBody  =>  Client to Server =>  JSON or XML to Java Object   => Content-Type = application/json
+
+
+@ResponseBody  => Server to Client => Java Object to JSON or XML  => Accept       = application/json 
+
+@RequestBody  => Client to Server =>  JSON or XML Java Object to  => Content-Type = application/json
+
+
+
+
+url      method       mapping old style                                                                                                                   new style                                         =========================================================================================================
+/hello   GET           @RequestMapping(value="/hello",method=RequestMethod.GET)                  @GetMapping("/hello")
+/hello   POST        @RequestMapping(value="/hello",method=RequestMethod.POST)                @PostMapping("/hello")
+/hello   DELETE    @RequestMapping(value="/hello",method=RequestMethod.DELETE)           @DeleteMapping("/hello")
+/hello   PUT           @RequestMapping(value="/hello",method=RequestMethod.PUT)                  @PutMapping("/hello")
+/hello   PATCH      @RequestMapping(value="/hello",method=RequestMethod.PATCH)            @PatchMapping("/hello")
+
+
+CRUDRepository
+          |
+PagingAndSortingRepository
+         |
+JAPRepository
+
+
+
+
+HTTP status codes
+======================
+200    :   OK
+201    :   Created
+500    :   INTERNAL SERVER ERROR
+404    :   NOT FOUND
+204    :   NO CONTENT
+401    :   INVALID CREDENTAILS
+403    :   FORBIDDEN
+405    :   METHOD NOT ALLOWED
+
+
 
 
 
